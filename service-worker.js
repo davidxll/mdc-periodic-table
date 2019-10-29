@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/mdc-periodic-table/precache-manifest.a932907e22c4f9ae9ba31e319b73bc30.js"
+  "/mdc-periodic-table/precache-manifest.d4b83a10cba8b7db4a351ccefb533f88.js"
 );
 
 workbox.clientsClaim();
