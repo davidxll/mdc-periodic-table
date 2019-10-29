@@ -1,7 +1,15 @@
 @import '_normalize.css';
-
+@import '_react-tabs.css';
 * {
   box-sizing: border-box;
+}
+
+.visual-parts-toggle label {
+  display: block;
+}
+
+.visual-parts-toggle input {
+  margin-right: 6px;
 }
 
 header {
@@ -37,6 +45,7 @@ body {
 
 main {
   width: 90%;
+  width: fit-content;
   margin: 0 auto;
 }
 
@@ -54,16 +63,34 @@ main {
   grid-template-columns: repeat(17, auto) 1fr;
 }
 
+#element-info-box {
+  grid-column: 3/13;
+  grid-row: 1/4;
+  display: flex;
+}
+
 /* Every element box  */
 .element {
   cursor: pointer;
   width: 5vw;
   height: 5vw;
 
-  padding: 2px;
+  padding: 0.2vw;
   border: 1px solid #333333;
   border-collapse: collapse;
   overflow: hidden;
+  transition: all 1s;
+}
+
+.element:hover {
+  transform: scale(1.5);
+  z-index: 1;
+}
+
+.element:focus {
+  outline: 2px dotted #003057 !important;
+  outline-offset: 1px !important;
+  z-index: 1;
 }
 
 .number {
@@ -75,8 +102,14 @@ main {
 .symbol {
   font-weight: bold;
   text-align: center;
-  margin-top: 0.5vw;
+  line-height: 1;
+  margin-top: 0.8vw;
   font-size: 2.5vw;
+}
+
+.element .element-mass {
+  font-size: 0.6vw;
+  text-align: center;
 }
 
 .element-name {
@@ -86,19 +119,25 @@ main {
 
 #element-box .symbol {
   font-size: 5vw;
+  margin-top: 2.8vw;
 }
 
 #element-box .number {
-  font-size: 1vw;
-}
-
-#element-box .element-name {
   font-size: 1.5vw;
 }
 
+#element-box .element-name {
+  font-size: 2vw;
+}
+
+#element-box .element-info-mass {
+  font-size: 1.2vw;
+  text-align: center;
+}
+
 #element-box {
-  grid-column: 3/5;
-  grid-row: 2/4;
+  width: 30%;
+  grid-column: 1;
   margin: 0;
   padding: 0.2vw;
   overflow: hidden;
@@ -106,13 +145,17 @@ main {
 
 /* Information Table  */
 #information {
-  grid-column: 5/13;
-  grid-row: 2/4;
+  width: 70%;
+  grid-column: 2;
   padding: 0.5vw;
   padding-top: 0;
   font-size: 1vw;
-  max-height: 10vw;
-  overflow: scroll;
+  max-height: 15vw;
+  overflow-y: scroll;
+}
+
+#information .element-description-source {
+  max-width: fit-content;
 }
 
 #information h1 {
@@ -135,6 +178,7 @@ main {
   float: right;
   cursor: pointer;
   color: #cccccc;
+  margin-top: 7px;
 }
 
 .close-button:hover {
@@ -143,11 +187,33 @@ main {
 
 .appearance {
   margin-bottom: 0.5vw;
+  max-width: fit-content;
 }
 
 .atom_info {
-  margin-bottom: 0.5vw;
+  margin-top: 0.5vw;
   color: #998100;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.atom_info tr {
+  border-bottom: 1px solid #aaa;
+  transition: color .6s;
+}
+
+.atom_info tr:hover {
+  color: black;
+  font-weight: 600;
+}
+
+.atom_info th {
+  text-align: left;
+  padding-right: 15px;
+}
+
+.atom_info p {
+  margin: 0;
 }
 
 /* Helium to the top right  */
@@ -241,4 +307,77 @@ main {
 .active {
   background: #fff;
   /* border-color: yellow; */
+}
+
+/* COLLAPSIBLE STYLES */
+
+.Collapsible {
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 12px;
+  border: 1px solid #333333;
+}
+
+/* The content within the collaspable area */
+.Collapsible__contentInner {
+  padding: 10px;
+  border: 1px solid rgb(235, 235, 235);
+  border-top: 0;
+}
+
+.Collapsible__contentInner  p {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.Collapsible__contentInner p:last-child {
+  margin-bottom: 0;
+}
+
+/* The link which when clicked opens the collapsable area */
+.Collapsible__trigger {
+  display: block;
+  font-weight: 400;
+  text-decoration: none;
+  color: rgb(51, 51, 51);
+  position: relative;
+  border: 1px solid white;
+  padding: 10px;
+  background: rgb(0, 172, 157);
+  color: white;
+  cursor: pointer;
+}
+
+.Collapsible__trigger:after {
+  content: '>';
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: block;
+  transition: transform 300ms;
+}
+
+.Collapsible__trigger.is-open:after {
+  transform: rotateZ(90deg);
+}
+
+.Collapsible__trigger.is-disabled {
+  opacity: 0.5;
+  background-color: grey;
+}
+
+.CustomTriggerCSS {
+  background-color: lightcoral;
+  transition: background-color 200ms ease;
+}
+
+.CustomTriggerCSS--open {
+  background-color: darkslateblue;
+}
+
+.Collapsible__custom-sibling {
+  padding: 5px;
+  font-size: 12px;
+  background-color: #CBB700;
+  color: black;
 }

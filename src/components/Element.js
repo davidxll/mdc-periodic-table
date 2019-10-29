@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import { elements } from './_data';
 
+function getStyles (props) {
+  let styles = {
+    elementName: {}
+  };
+  if (props.showName && (props.showDensity || props.showAtomicMass)) {
+    styles.elementName.marginTop = '0';
+  }
+  return styles;
+}
+
 export default class Element extends Component {
   state = {
     hover: false
@@ -19,20 +29,32 @@ export default class Element extends Component {
   };
 
   render() {
-    let { num } = this.props;
+    let { num, showDensity, showAtomicMass, showAtomicNumber, showName } = this.props;
     let element = elements[num];
+    let styles = getStyles(this.props);
     return (
       <div
         title={element.name}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onClick={this.openInfo}
+        tabIndex="0"
         className={`element element-${num} ${element.category} ${
           this.state.hover ? 'active' : ''
         }`}>
-        <div className="number">{element.number}</div>
-        <div className="symbol">{element.symbol}</div>
-        <div className="element-name">{element.name}</div>
+        {showAtomicNumber &&
+          <div className="number">{element.number}</div>
+        }
+        <div className="symbol" style={styles.elementName}>{element.symbol}</div>
+        {showName && 
+          <div className="element-name">{element.name}</div>
+        }
+        {showAtomicMass &&
+          <div className="element-mass">{element.atomic_mass}</div>
+        }
+        {showDensity &&
+          <div className="element-mass">{element.density}</div>
+        }
       </div>
     );
   }
